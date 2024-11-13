@@ -1,0 +1,1 @@
+import{f as n,o,c as a,a as t}from"./0goSeNrM.js";import{u as r}from"./DdvrPj6M.js";const m=n({__name:"index",setup(s){return r({title:"关于"}),(l,e)=>(o(),a("div",null,e[0]||(e[0]=[t("p",null,"关于",-1),t("p",null,"这是寻求一些具有帮助性的提示页面",-1)])))}});export{m as default};
