@@ -1,0 +1,32 @@
+{
+  "name": "socket_io_server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:http": "cross-env NODE_ENV=http_devlopment  nodemon ./app.js  && echo \"nodemon app.js --dev-- successfully started\"",
+    "dev:https": "cross-env NODE_ENV=https_devlopment  nodemon ./app.js  && echo \"nodemon app.js --dev-- successfully started\"",
+    "preview:http": "cross-env NODE_ENV=http_preview nodemon start ./app.js && echo \"nodemon app.js--preview-- successfully started\"",
+    "preview:https": "cross-env NODE_ENV=https_preview nodemon start ./app.js && echo \"nodemon app.js--preview-- successfully started\"",
+    "start:http_pm2": "cross-env NODE_ENV=http_production pm2 start ./app.js && echo \"pm2 app.js--production-- successfully started\"",
+    "prod:https_pm2": "cross-env NODE_ENV=https_production pm2 start ./app.js && echo \"pm2 app.js--production-- successfully started\"",
+    "git": "node ./git-commit.js && echo \"node ./git-commit.js successfully\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "autocannon": "^8.0.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "simple-git": "^3.27.0",
+    "socket.io": "^4.8.0"
+  }
+}
