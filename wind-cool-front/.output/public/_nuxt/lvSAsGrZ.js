@@ -1,0 +1,1 @@
+import{f as s,u as t,r as a,o as c,c as n,_ as r}from"./Bxys4SGA.js";const _=s({__name:"help",setup(p){const e=t(),{id:o}=e.params;return a(o),(u,l)=>(c(),n("div",null," 帮助中心 "))}}),f=r(_,[["__scopeId","data-v-dae42431"]]);export{f as default};

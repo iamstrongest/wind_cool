@@ -1,1 +1,0 @@
-import{f as o,u as a,o as n,c,a as t,b as _,g as r,_ as p}from"./0goSeNrM.js";const d={class:"container"},l=o({__name:"details",setup(u){return a(),(i,e)=>{const s=r;return n(),c("div",d,[e[0]||(e[0]=t("span",null,"详情列表",-1)),t("div",null,[_(s)])])}}}),f=p(l,[["__scopeId","data-v-562ccfc5"]]);export{f as default};

@@ -36,18 +36,13 @@ const onSubmit = async () => {
     formData.append('username', registerForm.username);
     try {
         // 使用 axios 发送 POST 请求
-        const url = "/register";
-        const params = {
-            method: "post",
-            body: formData
-        };
-        const response = await glboalStore.register(url, params);
-        console.log('上传成功:', response.data);
+        const resp = await glboalStore.registerFn(formData);
+        console.log('上传成功:', resp.data);
         registerForm.email = '';
         registerForm.password = '';
         registerForm.username = '';
-        if (response.data.code == 200) {
-            alert(response.data.message);
+        if (resp.code == 200) {
+            alert(resp.message);
         }
     } catch (error) {
         console.error('上传失败:', error);
@@ -126,7 +121,6 @@ const onChange = (event) => {
     display: flex;
     flex-direction: row;
     justify-items: center;
-    align-items: center;
 }
 
 .submit {
@@ -148,5 +142,9 @@ input {
     width: 200px;
     height: 40px;
     border-radius: 20px;
+}
+
+#file {
+    border-radius: 0;
 }
 </style>

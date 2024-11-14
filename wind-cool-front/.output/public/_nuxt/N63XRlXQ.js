@@ -1,0 +1,1 @@
+import{f as o,u as r,r as l,o as u,c,a as s,t as i}from"./Bxys4SGA.js";const m=o({__name:"index",setup(p){const t=r(),{serach:a}=t.query,n=l(a);return(d,e)=>(u(),c("div",null,[e[0]||(e[0]=s("span",null,"详情列表",-1)),s("div",null,"详情-- "+i(n.value),1)]))}});export{m as default};

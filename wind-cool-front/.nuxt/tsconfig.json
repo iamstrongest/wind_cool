@@ -105,7 +105,7 @@
         "./imports"
       ],
       "#app-manifest": [
-        "./manifest/meta/dev.json"
+        "./manifest/meta/7f33ce90-7a13-47c4-b2ce-b466b5a8f3cc.json"
       ],
       "#components": [
         "./components"
@@ -145,6 +145,8 @@
     "../**/*",
     "../node_modules/@pinia/nuxt/runtime",
     "../node_modules/@pinia/nuxt/dist/runtime",
+    "../node_modules/@element-plus/nuxt/runtime",
+    "../node_modules/@element-plus/nuxt/dist/runtime",
     "../node_modules/@nuxt/devtools/runtime",
     "../node_modules/@nuxt/devtools/dist/runtime",
     "../node_modules/@nuxt/telemetry/runtime",
@@ -154,9 +156,12 @@
   "exclude": [
     "../dist",
     "../node_modules",
+    "../../node_modules",
     "../node_modules/nuxt/node_modules",
     "../node_modules/@pinia/nuxt/runtime/server",
     "../node_modules/@pinia/nuxt/dist/runtime/server",
+    "../node_modules/@element-plus/nuxt/runtime/server",
+    "../node_modules/@element-plus/nuxt/dist/runtime/server",
     "../node_modules/@nuxt/devtools/runtime/server",
     "../node_modules/@nuxt/devtools/dist/runtime/server",
     "../node_modules/@nuxt/telemetry/runtime/server",

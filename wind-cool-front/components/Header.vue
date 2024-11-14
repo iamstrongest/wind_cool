@@ -2,15 +2,15 @@
  * @Author: strongest-qiang 1309148358@qq.com
  * @Date: 2023-08-26 15:16:46
  * @LastEditors: strongest-qiang 1309148358@qq.com
- * @LastEditTime: 2024-11-13 21:21:15
+ * @LastEditTime: 2024-11-14 12:02:01
  * @FilePath: \wind-cool\wind-cool-front\components\Header.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
-<script lang='ts' setup>
+<script lang="ts" setup>
 const glboalStore = useGlboalStore();
 const userHref = computed(() => {
-    return "/user/" + glboalStore.state.userinfo?.userId + ".html"
-})
+    return "/user/" + glboalStore.state.userinfo?.userId + ".html";
+});
 function logout() {
     glboalStore.logout();
 }
@@ -26,11 +26,21 @@ function logout() {
                     个人信息
                 </NuxtLink>
                 <NuxtLink class="link" to="/user/login.html" v-else>前往登录</NuxtLink>
-                <NuxtLink class="link" to="/more.html">更多</NuxtLink>
-                <NuxtLink class="link" to="/about.html">关于</NuxtLink>
-                <NuxtLink class="link" to="/user/login.html" @click="logout">退出登录</NuxtLink>
-            </li>
 
+                <el-popover placement="bottom" :width="60" trigger="click">
+                    <template #reference>
+                        <el-button class="m-2">
+                            更多
+                        </el-button>
+                    </template>
+            <li class="more-li">
+                <NuxtLink to="/about.html">关于</NuxtLink>
+            </li>
+            <li class="more-li">
+                <NuxtLink to="/user/login.html" @click="logout">退出登录</NuxtLink>
+            </li>
+            </el-popover>
+            </li>
         </nav>
     </div>
 </template>
@@ -76,6 +86,15 @@ li .link {
     border-radius: 0.3125rem;
 }
 
+.more-li {
+    justify-content: center;
+    align-items: center;
+}
+
+.more-li:hover {
+    border-bottom: 1px solid skyblue;
+}
+
 .link:hover {
     text-decoration: underline;
     color: #09c36f;
@@ -84,6 +103,6 @@ li .link {
 img {
     width: 3rem;
     height: 1.5rem;
-    border-radius: 50%
+    border-radius: 50%;
 }
 </style>

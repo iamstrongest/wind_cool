@@ -17,20 +17,12 @@ const router = useRouter();
 const onSubmit = async () => {
     try {
         // 使用 axios 发送 POST 请求
-        const url = "/login"
-        const pamams = {
-            method: "post",
-            body: JSON.stringify(LoginForm),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }
-        const resp = await glboalStore.login(url, pamams);
+        const resp = await glboalStore.loginFn(LoginForm);
         const flag = confirm(resp.message);
         if (flag) {
             router.push("/index.html");
         }
-        LoginForm.accout = '';
+        LoginForm.account = '';
         LoginForm.password = '';
     } catch (error) {
         console.error('登录失败:', error);
@@ -41,7 +33,7 @@ const onSubmit = async () => {
     <div class="form_container">
         <form @submit.prevent="onSubmit">
             <div class="form_col">
-                <label for="accout"><input type="text" v-model="LoginForm.account" id="accout"
+                <label for="account"><input type="text" v-model="LoginForm.account" id="account"
                         placeholder="请输入账号或者邮箱"></label>
             </div>
             <div class="form_col">
