@@ -42,4 +42,5 @@ export { default as api } from '../composables/api/index';
 export { login, register, getUserinfo } from '../composables/api/user';
 export { useGlboalStore } from '../composables/stores/index';
 export { defineStore, acceptHMRUpdate, usePinia, storeToRefs } from '../node_modules/@pinia/nuxt/dist/runtime/composables';
+export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
 export { definePageMeta } from '../node_modules/nuxt/dist/pages/runtime/composables';

@@ -1,1 +1,0 @@
-import{f as o,u as s,r as c,o as r,c as _,a as p,t as u,b as l,g as m}from"./Bxys4SGA.js";const g=o({__name:"index",setup(d){const e=s(),{id:a}=e.params,t=c(a);return(i,f)=>{const n=m;return r(),_("div",null,[p("span",null,"用户-- "+u(t.value),1),l(n)])}}});export{g as default};
