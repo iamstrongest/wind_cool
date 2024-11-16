@@ -26,7 +26,11 @@ export default defineNuxtConfig({
 
     },
     modules: ['@pinia/nuxt', '@element-plus/nuxt'],
-    elementPlus: { /** Options */ },
+    elementPlus: {
+        /** Options */
+        defaultLocale: 'zh-cn'
+
+    },
     devServer: {
         host: "0.0.0.0",
         port: 3003

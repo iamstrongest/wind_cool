@@ -14,4 +14,7 @@ export default [
   "/api/avatar",
   "/api/refresh",
   "/api/register",
+  "/api/attendance",
+  "/api/userattendance",
+  "/api/absence",
 ];

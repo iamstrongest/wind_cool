@@ -32,6 +32,26 @@ export const apiNormalParmas = [
     method: "get",
     params: ["id"],
   },
+  {
+    path: "/api/attendance",
+    method: "get",
+    params: ["userId", "attendance_year_month"],
+  },
+  {
+    path: "/api/attendance",
+    method: "post",
+    params: ["userId"],
+  },
+  {
+    path: "/api/userattendance",
+    method: "get",
+    params: ["userId", "attendance_year_month"],
+  },
+  {
+    path: "/api/absence",
+    method: "post",
+    params: ["userId","description"],
+  },
 ];
 export const apiSpeciallParmas = [
   {

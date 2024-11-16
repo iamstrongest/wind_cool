@@ -301,6 +301,7 @@ declare global {
   const ID_INJECTION_KEY: typeof import('../../node_modules/element-plus/es/hooks/use-id/index')['ID_INJECTION_KEY']
   const ZINDEX_INJECTION_KEY: typeof import('../../node_modules/element-plus/es/hooks/use-z-index/index')['ZINDEX_INJECTION_KEY']
   const abortNavigation: typeof import('../../node_modules/nuxt/dist/app/composables/router')['abortNavigation']
+  const absence: typeof import('../../composables/api/user')['absence']
   const acceptHMRUpdate: typeof import('../../node_modules/@pinia/nuxt/dist/runtime/composables')['acceptHMRUpdate']
   const addRouteMiddleware: typeof import('../../node_modules/nuxt/dist/app/composables/router')['addRouteMiddleware']
   const api: typeof import('../../composables/api/index')['default']
@@ -328,15 +329,18 @@ declare global {
   const effect: typeof import('vue')['effect']
   const effectScope: typeof import('vue')['effectScope']
   const getAppManifest: typeof import('../../node_modules/nuxt/dist/app/composables/manifest')['getAppManifest']
+  const getAttendanceList: typeof import('../../composables/api/user')['getAttendanceList']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getRouteRules: typeof import('../../node_modules/nuxt/dist/app/composables/manifest')['getRouteRules']
+  const getUserAttendanceList: typeof import('../../composables/api/user')['getUserAttendanceList']
   const getUserinfo: typeof import('../../composables/api/user')['getUserinfo']
   const h: typeof import('vue')['h']
   const hasInjectionContext: typeof import('vue')['hasInjectionContext']
   const httpFetch: typeof import('../../composables/api/glboal')['httpFetch']
   const inject: typeof import('vue')['inject']
   const injectHead: typeof import('../../node_modules/@unhead/vue')['injectHead']
+  const insertAttendance: typeof import('../../composables/api/user')['insertAttendance']
   const isNuxtError: typeof import('../../node_modules/nuxt/dist/app/composables/error')['isNuxtError']
   const isPrerendered: typeof import('../../node_modules/nuxt/dist/app/composables/payload')['isPrerendered']
   const isProxy: typeof import('vue')['isProxy']
@@ -791,6 +795,7 @@ declare module 'vue' {
     readonly ID_INJECTION_KEY: UnwrapRef<typeof import('../../node_modules/element-plus/es/hooks/use-id/index')['ID_INJECTION_KEY']>
     readonly ZINDEX_INJECTION_KEY: UnwrapRef<typeof import('../../node_modules/element-plus/es/hooks/use-z-index/index')['ZINDEX_INJECTION_KEY']>
     readonly abortNavigation: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/router')['abortNavigation']>
+    readonly absence: UnwrapRef<typeof import('../../composables/api/user')['absence']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('../../node_modules/@pinia/nuxt/dist/runtime/composables')['acceptHMRUpdate']>
     readonly addRouteMiddleware: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/router')['addRouteMiddleware']>
     readonly api: UnwrapRef<typeof import('../../composables/api/index')['default']>
@@ -818,15 +823,18 @@ declare module 'vue' {
     readonly effect: UnwrapRef<typeof import('vue')['effect']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly getAppManifest: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/manifest')['getAppManifest']>
+    readonly getAttendanceList: UnwrapRef<typeof import('../../composables/api/user')['getAttendanceList']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getRouteRules: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/manifest')['getRouteRules']>
+    readonly getUserAttendanceList: UnwrapRef<typeof import('../../composables/api/user')['getUserAttendanceList']>
     readonly getUserinfo: UnwrapRef<typeof import('../../composables/api/user')['getUserinfo']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly hasInjectionContext: UnwrapRef<typeof import('vue')['hasInjectionContext']>
     readonly httpFetch: UnwrapRef<typeof import('../../composables/api/glboal')['httpFetch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly injectHead: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['injectHead']>
+    readonly insertAttendance: UnwrapRef<typeof import('../../composables/api/user')['insertAttendance']>
     readonly isNuxtError: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/error')['isNuxtError']>
     readonly isPrerendered: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/payload')['isPrerendered']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>

@@ -2,13 +2,13 @@
  * @Author: strongest-qiang 1309148358@qq.com
  * @Date: 2024-10-20 11:29:39
  * @LastEditors: strongest-qiang 1309148358@qq.com
- * @LastEditTime: 2024-11-13 09:34:34
+ * @LastEditTime: 2024-11-16 12:22:10
  * @FilePath: \Front-end\Vue\Vue3\IM\socket_io\socket_io_server\src\db\index.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import mysql from "mysql";
 import { dbConfig } from "../config/db.js";
-import { createUsersTable } from "./model/user.js";
+import { createUsersTable, createAttendanceTable } from "./model/user.js";
 // 创建数据库连接
 const db = mysql.createConnection({
   host: dbConfig.host,
@@ -57,6 +57,7 @@ function initializeDatabase() {
         // 创建表
         // 创建用户表
         createUsersTable(db, callback);
+        createAttendanceTable(db, callback);
       });
     }
   );

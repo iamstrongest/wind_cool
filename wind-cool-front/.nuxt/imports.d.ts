@@ -39,7 +39,7 @@ export { injectHead, useHead, useSeoMeta, useHeadSafe, useServerHead, useServerS
 export { storageFn, clearStorageFn } from '../utils/index';
 export { httpFetch } from '../composables/api/glboal';
 export { default as api } from '../composables/api/index';
-export { login, register, getUserinfo } from '../composables/api/user';
+export { login, register, getUserinfo, getAttendanceList, insertAttendance, getUserAttendanceList, absence } from '../composables/api/user';
 export { useGlboalStore } from '../composables/stores/index';
 export { defineStore, acceptHMRUpdate, usePinia, storeToRefs } from '../node_modules/@pinia/nuxt/dist/runtime/composables';
 export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';

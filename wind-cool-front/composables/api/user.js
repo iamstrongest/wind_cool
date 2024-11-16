@@ -36,3 +36,39 @@ export function getUserinfo() {
     method,
   });
 }
+export function getAttendanceList(params) {
+  const method = "get";
+  const url = "/attendance";
+  return service({
+    url,
+    method,
+    params,
+  });
+}
+export function insertAttendance(data) {
+  const method = "post";
+  const url = "/attendance";
+  return service({
+    url,
+    method,
+    data,
+  });
+}
+export function getUserAttendanceList(params) {
+  const method = "get";
+  const url = "/userattendance";
+  return service({
+    url,
+    method,
+    params,
+  });
+}
+export function absence(data) {
+  const method = "post";
+  const url = "/absence";
+  return service({
+    url,
+    method,
+    data,
+  });
+}

@@ -2,7 +2,7 @@
  * @Author: strongest-qiang 1309148358@qq.com
  * @Date: 2024-10-20 11:19:08
  * @LastEditors: strongest-qiang 1309148358@qq.com
- * @LastEditTime: 2024-11-13 12:53:28
+ * @LastEditTime: 2024-11-16 16:38:39
  * @FilePath: \Vue\Vue3\IM\socket_io\socket_io_server\src\dao\user.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -424,6 +424,204 @@ export const updateUserinfoFn = async function (params) {
         });
       }
     });
+  });
+  return sqlData;
+};
+export const getAttendanceFn = async function (params) {
+  const { userId, attendance_year_month } = params;
+  const sql = `select * from attendance where userId=? and attendance_year_month=?`;
+  const data = [];
+  const dateMap = {};
+  await new Promise((resolve, reject) => {
+    db.query(sql, [userId, attendance_year_month], (err, rows) => {
+      if (err) return console.log(err.message);
+      if (rows.length > 0) {
+        rows.forEach((row) => {
+          if (!dateMap[row.date]) {
+            dateMap[row.date] = [];
+          }
+          dateMap[row.date].push(row.createdAt);
+        });
+        const offset = 8 * 60; // 中国时区偏移量，单位为分钟
+        Object.keys(dateMap).forEach((key) => {
+          const length = dateMap[key].length;
+          const localTimeEarliest = new Date(
+            dateMap[key][0].getTime() + offset * 60000
+          ); // 手动加上偏移量
+          const localTimeLatest = new Date(
+            dateMap[key][length - 1].getTime() + offset * 60000
+          ); // 手动加上偏移量
+          const text =
+            localTimeLatest.getTime() - localTimeEarliest.getTime() <
+            1000 * 60 * 60 * 9
+              ? "缺勤"
+              : "√";
+          data.push({
+            latest: localTimeLatest,
+            earliest: localTimeEarliest,
+            text,
+            createdAt: key,
+            showAbsence:
+              localTimeLatest.getTime() - localTimeEarliest.getTime() <
+              1000 * 60 * 60 * 9,
+          });
+        });
+      }
+      resolve();
+    });
+  });
+  const sqlData = {
+    code: 200,
+    message: "获取考勤表成功",
+    data,
+    g: Date.now(),
+  };
+  return sqlData;
+};
+export const getUserAttendanceFn = async function (params) {
+  const { userId, attendance_year_month } = params;
+  const sort = "asc"; //desc降序 asc升序
+  const sql = `select * from attendance where userId=? and attendance_year_month=? order by createdAt ${sort}`;
+  const dateMap = {};
+  const data = [];
+  const sqlData = await new Promise((resolve, reject) => {
+    db.query(sql, [userId, attendance_year_month], (err, rows) => {
+      if (err) return console.log(err.message);
+      if (rows.length > 0) {
+        rows.forEach((row) => {
+          if (!dateMap[row.date]) {
+            dateMap[row.date] = [];
+          }
+          dateMap[row.date].push(row.createdAt);
+        });
+        const offset = 8 * 60; // 中国时区偏移量，单位为分钟
+        Object.keys(dateMap).forEach((key) => {
+          const length = dateMap[key].length;
+          const localTimeEarliest = new Date(
+            dateMap[key][0].getTime() + offset * 60000
+          ); // 手动加上偏移量
+          const localTimeLatest = new Date(
+            dateMap[key][length - 1].getTime() + offset * 60000
+          ); // 手动加上偏移量
+          const text =
+            localTimeLatest.getTime() - localTimeEarliest.getTime() <
+            1000 * 60 * 60 * 9
+              ? "缺勤"
+              : "√";
+          data.push({
+            latest: localTimeLatest,
+            earliest: localTimeEarliest,
+            text,
+          });
+        });
+      }
+      resolve({
+        code: 200,
+        message: "获取用户考勤表成功",
+        data,
+        g: Date.now(),
+      });
+    });
+  });
+  return sqlData;
+};
+export const absenceFn = async function (params) {
+  const { userId, description } = params;
+  const date = new Date();
+  // 获取前一天
+  const yesterday = new Date(date);
+  yesterday.setDate(date.getDate() - 1);
+  // 设置时间为早上 9 点
+  yesterday.setHours(9, 0, 0, 0); // 设置为 9:00:00.000
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day =
+    yesterday.getDate() - 1 <= 9
+      ? "0" + yesterday.getDate()
+      : yesterday.getDate();
+  const attendance_year_month = "" + year + "-" + month;
+  const attendance_date = attendance_year_month + "-" + day;
+  let createdAt = yesterday;
+  let updatedAt = yesterday;
+  console.log(yesterday);
+  const sqlEarliest = `insert into attendance(userId,date,attendance_year_month,description,createdAt,updatedAt) VALUES(?,?,?,?,?,?)`;
+  await new Promise((resolve, reject) => {
+    db.query(
+      sqlEarliest,
+      [
+        userId,
+        attendance_date,
+        attendance_year_month,
+        description,
+        createdAt,
+        updatedAt,
+      ],
+      (err, rows) => {
+        if (err) return console.log(err.message);
+        if (rows.affectedRows > 0) {
+          resolve();
+        }
+      }
+    );
+  });
+  const sqlLatest = `insert into attendance(userId,date,attendance_year_month,description,createdAt,updatedAt) VALUES(?,?,?,?,?,?)`;
+  yesterday.setHours(18, 0, 0, 0); // 设置为 18:00:00.000
+  console.log(yesterday);
+
+  createdAt = yesterday;
+  updatedAt = yesterday;
+  await new Promise((resolve, reject) => {
+    db.query(
+      sqlLatest,
+      [
+        userId,
+        attendance_date,
+        attendance_year_month,
+        description,
+        createdAt,
+        updatedAt,
+      ],
+      (err, rows) => {
+        if (err) return console.log(err.message);
+        if (rows.affectedRows > 0) {
+          resolve();
+        }
+      }
+    );
+  });
+  return {
+    code: 200,
+    message: "补卡成功",
+    data: null,
+    g: Date.now(),
+  };
+};
+
+export const insertAttendanceFn = async function (params) {
+  const { userId } = params;
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate() <= 9 ? "0" + date.getDate() : date.getDate();
+  const attendance_year_month = "" + year + "-" + month;
+  const attendance_date = attendance_year_month + "-" + day;
+  const sql = `insert into attendance(userId,date,attendance_year_month) VALUES(?,?,?)`;
+  const sqlData = await new Promise((resolve, reject) => {
+    db.query(
+      sql,
+      [userId, attendance_date, attendance_year_month],
+      (err, rows) => {
+        if (err) return console.log(err.message);
+        if (rows.affectedRows > 0) {
+          resolve({
+            code: 200,
+            message: "打卡成功",
+            data: null,
+            g: Date.now(),
+          });
+        }
+      }
+    );
   });
   return sqlData;
 };
