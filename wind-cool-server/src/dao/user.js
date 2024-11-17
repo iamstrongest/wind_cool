@@ -2,7 +2,7 @@
  * @Author: strongest-qiang 1309148358@qq.com
  * @Date: 2024-10-20 11:19:08
  * @LastEditors: strongest-qiang 1309148358@qq.com
- * @LastEditTime: 2024-11-16 16:38:39
+ * @LastEditTime: 2024-11-17 11:37:23
  * @FilePath: \Vue\Vue3\IM\socket_io\socket_io_server\src\dao\user.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -429,7 +429,8 @@ export const updateUserinfoFn = async function (params) {
 };
 export const getAttendanceFn = async function (params) {
   const { userId, attendance_year_month } = params;
-  const sql = `select * from attendance where userId=? and attendance_year_month=?`;
+  const sort = "asc"; //desc降序 asc升序
+  const sql = `select * from attendance where userId=? and attendance_year_month=? order by createdAt ${sort}`;
   const data = [];
   const dateMap = {};
   await new Promise((resolve, reject) => {
@@ -526,24 +527,18 @@ export const getUserAttendanceFn = async function (params) {
   return sqlData;
 };
 export const absenceFn = async function (params) {
-  const { userId, description } = params;
-  const date = new Date();
-  // 获取前一天
-  const yesterday = new Date(date);
-  yesterday.setDate(date.getDate() - 1);
+  const { userId, description, time } = params;
+  const offset = 8 * 60; // 中国时区偏移量，单位为分钟
+  const date = new Date(new Date(time) + offset * 60000);
   // 设置时间为早上 9 点
-  yesterday.setHours(9, 0, 0, 0); // 设置为 9:00:00.000
+  date.setHours(9, 0, 0, 0); // 设置为 9:00:00.000
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
-  const day =
-    yesterday.getDate() - 1 <= 9
-      ? "0" + yesterday.getDate()
-      : yesterday.getDate();
+  const day = date.getDate() - 1 <= 9 ? "0" + date.getDate() : date.getDate();
   const attendance_year_month = "" + year + "-" + month;
   const attendance_date = attendance_year_month + "-" + day;
-  let createdAt = yesterday;
-  let updatedAt = yesterday;
-  console.log(yesterday);
+  let createdAt = date;
+  let updatedAt = date;
   const sqlEarliest = `insert into attendance(userId,date,attendance_year_month,description,createdAt,updatedAt) VALUES(?,?,?,?,?,?)`;
   await new Promise((resolve, reject) => {
     db.query(
@@ -565,11 +560,10 @@ export const absenceFn = async function (params) {
     );
   });
   const sqlLatest = `insert into attendance(userId,date,attendance_year_month,description,createdAt,updatedAt) VALUES(?,?,?,?,?,?)`;
-  yesterday.setHours(18, 0, 0, 0); // 设置为 18:00:00.000
-  console.log(yesterday);
-
-  createdAt = yesterday;
-  updatedAt = yesterday;
+  // 设置最后打卡时间为下午18 点
+  date.setHours(18, 0, 0, 0); // 设置为 18:00:00.000
+  createdAt = date;
+  updatedAt = date;
   await new Promise((resolve, reject) => {
     db.query(
       sqlLatest,

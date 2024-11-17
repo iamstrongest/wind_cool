@@ -2,7 +2,7 @@
  * @Author: strongest-qiang 1309148358@qq.com
  * @Date: 2023-08-26 15:16:46
  * @LastEditors: strongest-qiang 1309148358@qq.com
- * @LastEditTime: 2024-11-14 12:02:01
+ * @LastEditTime: 2024-11-17 11:42:44
  * @FilePath: \wind-cool\wind-cool-front\components\Header.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -79,11 +79,18 @@ li {
 
 li .link {
     width: 5rem;
-    height: 1.5rem;
+    height: 2rem;
     text-align: center;
-    color: #fff;
-    background-color: #000;
+    line-height: 2rem;
+    color: #000;
+    background-color: #fff;
     border-radius: 0.3125rem;
+    border: 1px solid #ccc;
+}
+
+li .link:hover {
+    background-color: #ecf5ff;
+    color: #409eff;
 }
 
 .more-li {
@@ -93,11 +100,6 @@ li .link {
 
 .more-li:hover {
     border-bottom: 1px solid skyblue;
-}
-
-.link:hover {
-    text-decoration: underline;
-    color: #09c36f;
 }
 
 img {

@@ -120,6 +120,7 @@ export const absenceController = async function (req, res) {
   const params = {
     userId: req.body.userId,
     description: req.body.description,
+    time: req.body.time,
   };
   const result = await absenceService(params);
   res.send(result);
