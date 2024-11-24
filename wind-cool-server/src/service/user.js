@@ -176,7 +176,7 @@ export const getAttendanceService = async function (req) {
 };
 /**
  *
- * @param {*}req { userId:string[用户id]}
+ * @param {*}req { userId:string[用户id]，userLatitude:number [维度],userLongitude:number [经度]}
  * @returns
  */
 export const insertAttendanceService = async function (req) {

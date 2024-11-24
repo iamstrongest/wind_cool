@@ -1,5 +1,6 @@
 <script setup>
-const glboalStore = useGlboalStore();
+import { useUserStore } from "~/composables/user"
+const userStore = useUserStore();
 const fileRef = useTemplateRef('file');
 const registerForm = reactive({
     password: "",
@@ -36,7 +37,7 @@ const onSubmit = async () => {
     formData.append('username', registerForm.username);
     try {
         // 使用 axios 发送 POST 请求
-        const resp = await glboalStore.registerFn(formData);
+        const resp = await userStore.registerFn(formData);
         console.log('上传成功:', resp.data);
         registerForm.email = '';
         registerForm.password = '';

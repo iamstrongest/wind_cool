@@ -2,7 +2,7 @@
  * @Author: strongest-qiang 1309148358@qq.com
  * @Date: 2023-08-26 15:16:52
  * @LastEditors: strongest-qiang 1309148358@qq.com
- * @LastEditTime: 2024-11-13 17:21:53
+ * @LastEditTime: 2024-11-18 12:08:09
  * @FilePath: \wind-cool\wind-cool-front\components\Footer.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -35,42 +35,43 @@ function cilckHandle(text) {
 }
 </script>
 <template>
-    <p>
-        <span>友情链接:</span>
-        <template v-for="app in apps" :key="app.id">
+    <div>
+        <p>
+            <span>友情链接:</span>
+            <template v-for="app in apps" :key="app.id">
+                <span>
+                    <a :href="app.href" target="_blank">
+                        {{ app.text }}
+                    </a>
+                </span>
+            </template>
+        </p>
+        <p>
             <span>
-                <a :href="app.href" target="_blank">
-                    {{ app.text }}
+                <a href="javascript:void(0);" @click="cilckHandle(info.email)">
+                    联系我: {{ info.email }}
                 </a>
             </span>
-        </template>
-        <span>
-            <a href="javascript:void(0);" @click="cilckHandle(info.email)">
-                联系我: {{ info.email }}
-            </a>
-        </span>
-        <span>
-            <a href="https://beian.miit.gov.cn/" target="_blank" @click="cilckHandle(info.recordText)">
-                {{ info.recordText }}
-            </a>
-        </span>
-    </p>
+            <span>
+                <a href="https://beian.miit.gov.cn/" target="_blank" @click="cilckHandle(info.recordText)">
+                    {{ info.recordText }}
+                </a>
+            </span>
+        </p>
+    </div>
 </template>
 
 <style scoped>
 p {
     width: 100%;
     display: flex;
+    font-size: 0.8rem;
     justify-content: center;
     text-align: center;
 }
 
 p span {
     margin-right: 1.25rem;
-}
-
-p span i {
-    cursor: pointer;
 }
 
 p span a {

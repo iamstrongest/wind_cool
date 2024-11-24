@@ -40,7 +40,7 @@ export const apiNormalParmas = [
   {
     path: "/api/attendance",
     method: "post",
-    params: ["userId"],
+    params: ["userId", "userLatitude", "userLongitude"],
   },
   {
     path: "/api/userattendance",
@@ -50,7 +50,7 @@ export const apiNormalParmas = [
   {
     path: "/api/absence",
     method: "post",
-    params: ["userId","description","time"],
+    params: ["userId", "description", "time"],
   },
 ];
 export const apiSpeciallParmas = [

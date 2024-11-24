@@ -2,7 +2,7 @@
  * @Author: strongest-qiang 1309148358@qq.com
  * @Date: 2024-10-20 11:06:34
  * @LastEditors: strongest-qiang 1309148358@qq.com
- * @LastEditTime: 2024-11-16 12:03:03
+ * @LastEditTime: 2024-11-23 23:56:31
  * @FilePath: \Front-end\Vue\Vue3\IM\socket_io\socket_io_server\src\controller\user.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -20,7 +20,7 @@ import {
   getAttendanceService,
   insertAttendanceService,
   getUserAttendanceService,
-  absenceService
+  absenceService,
 } from "../service/user.js";
 
 export const registController = async function (req, res) {
@@ -104,6 +104,8 @@ export const getAttendanceController = async function (req, res) {
 export const insertAttendanceController = async function (req, res) {
   const params = {
     userId: req.body.userId,
+    userLatitude: req.body.userLatitude, //纬度
+    userLongitude: req.body.userLongitude, //经度
   };
   const result = await insertAttendanceService(params);
   res.send(result);

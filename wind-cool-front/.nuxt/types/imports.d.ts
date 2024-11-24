@@ -331,7 +331,9 @@ declare global {
   const getAppManifest: typeof import('../../node_modules/nuxt/dist/app/composables/manifest')['getAppManifest']
   const getAttendanceList: typeof import('../../composables/api/user')['getAttendanceList']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
+  const getCurrentPosition: typeof import('../../utils/index')['getCurrentPosition']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getDeviceType: typeof import('../../utils/index')['getDeviceType']
   const getRouteRules: typeof import('../../node_modules/nuxt/dist/app/composables/manifest')['getRouteRules']
   const getUserAttendanceList: typeof import('../../composables/api/user')['getUserAttendanceList']
   const getUserinfo: typeof import('../../composables/api/user')['getUserinfo']
@@ -415,7 +417,7 @@ declare global {
   const useCssVars: typeof import('vue')['useCssVars']
   const useError: typeof import('../../node_modules/nuxt/dist/app/composables/error')['useError']
   const useFetch: typeof import('../../node_modules/nuxt/dist/app/composables/fetch')['useFetch']
-  const useGlboalStore: typeof import('../../composables/stores/index')['useGlboalStore']
+  const useGlboalStore: typeof import('../../composables/index')['useGlboalStore']
   const useHead: typeof import('../../node_modules/@unhead/vue')['useHead']
   const useHeadSafe: typeof import('../../node_modules/@unhead/vue')['useHeadSafe']
   const useHydration: typeof import('../../node_modules/nuxt/dist/app/composables/hydrate')['useHydration']
@@ -474,6 +476,7 @@ declare global {
   const useState: typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useTransitionState: typeof import('vue')['useTransitionState']
+  const useUserStore: typeof import('../../composables/user')['useUserStore']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -825,7 +828,9 @@ declare module 'vue' {
     readonly getAppManifest: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/manifest')['getAppManifest']>
     readonly getAttendanceList: UnwrapRef<typeof import('../../composables/api/user')['getAttendanceList']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
+    readonly getCurrentPosition: UnwrapRef<typeof import('../../utils/index')['getCurrentPosition']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getDeviceType: UnwrapRef<typeof import('../../utils/index')['getDeviceType']>
     readonly getRouteRules: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/manifest')['getRouteRules']>
     readonly getUserAttendanceList: UnwrapRef<typeof import('../../composables/api/user')['getUserAttendanceList']>
     readonly getUserinfo: UnwrapRef<typeof import('../../composables/api/user')['getUserinfo']>
@@ -909,7 +914,7 @@ declare module 'vue' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useError: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/error')['useError']>
     readonly useFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/fetch')['useFetch']>
-    readonly useGlboalStore: UnwrapRef<typeof import('../../composables/stores/index')['useGlboalStore']>
+    readonly useGlboalStore: UnwrapRef<typeof import('../../composables/index')['useGlboalStore']>
     readonly useHead: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useHead']>
     readonly useHeadSafe: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useHeadSafe']>
     readonly useHydration: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/hydrate')['useHydration']>
@@ -968,6 +973,7 @@ declare module 'vue' {
     readonly useState: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useTransitionState: UnwrapRef<typeof import('vue')['useTransitionState']>
+    readonly useUserStore: UnwrapRef<typeof import('../../composables/user')['useUserStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>

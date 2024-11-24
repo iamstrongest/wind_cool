@@ -2,7 +2,7 @@
  * @Author: strongest-qiang 1309148358@qq.com
  * @Date: 2024-10-09 19:41:59
  * @LastEditors: strongest-qiang 1309148358@qq.com
- * @LastEditTime: 2024-11-17 11:33:25
+ * @LastEditTime: 2024-11-24 10:43:31
  * @FilePath: \Front-end\Vue\Vue3\demo\axios上传文件和表单\element_ui_test\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,7 +10,7 @@
 const request_data = ref([]);
 const calendar = ref()
 const currentDate = ref(new Date());
-const glboalStore = useGlboalStore();
+const userStore = useUserStore();
 const dialogFormVisible = ref(false);
 const selectDate = async (val) => {
   if (!calendar.value) return
@@ -18,7 +18,7 @@ const selectDate = async (val) => {
   const year = new Date(currentDate.value).getFullYear();
   const month = new Date(currentDate.value).getMonth() + 1;
   const attendance_year_month = "" + year + "-" + month;
-  const userId = glboalStore.state.userinfo?.userId;
+  const userId = userStore.state.userinfo?.userId;
   const params = {
     userId,
     attendance_year_month
@@ -30,11 +30,16 @@ const description = ref('');
 const absenceTime = ref();
 const maxAbsenceDay = 3;//最大补卡时间
 function showAbsence(time) {
-  const year = new Date().getFullYear();
-  const month = new Date().getMonth() + 1;
-  const day = new Date().getDate() <= 9 ? "0" + new Date().getDate() : new Date().getDate();
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const day = now.getDate() <= 9 ? "0" + now.getDate() : now.getDate();
   const date = `${year}-${month}-${day}`;
-  return date !== time && Date.now() - new Date(time).getTime() < 1000 * 60 * 60 * 24 * (maxAbsenceDay + 1) && Date.now() > new Date(time).getTime()
+  // 打卡时间示例：假设打卡时间是一个具体的日期（可以替换为实际打卡时间）
+  const punchTime = new Date(time);  // 替换为实际的打卡时间
+  return date !== time && now.getTime() - punchTime.getTime() <= oneDayInMilliseconds * (maxAbsenceDay) && now.getTime() > punchTime.getTime()
 }
 function showdCheck(time) {
   const year = new Date().getFullYear();
@@ -44,7 +49,7 @@ function showdCheck(time) {
   return date == time
 }
 async function absenceFn() {
-  const userId = glboalStore.state.userinfo?.userId;
+  const userId = userStore.state.userinfo?.userId;
   if (description.value == '') {
     ElMessage({
       message: "填写内容不能为空",
@@ -63,15 +68,18 @@ async function absenceFn() {
       message: resp.message,
       type: 'success',
     })
+    await getAttendanceListFn();
   }
 }
 function setAttendanceDay(cellDay) {
   absenceTime.value = cellDay;
 }
 async function insertAttendanceFn() {
-  const userId = glboalStore.state.userinfo?.userId;
+  const { userLatitude, userLongitude, } = await getCurrentPosition()
+  const userId = userStore.state.userinfo?.userId;
   const params = {
     userId,
+    userLatitude, userLongitude
   }
   const { data: resp } = await insertAttendance(params);
   if (resp.code == 200) {
@@ -81,17 +89,20 @@ async function insertAttendanceFn() {
     })
   }
 }
-onMounted(async () => {
+async function getAttendanceListFn() {
   const year = new Date(currentDate.value).getFullYear();
   const month = new Date(currentDate.value).getMonth() + 1;
   const attendance_year_month = "" + year + "-" + month;
-  const userId = glboalStore.state.userinfo?.userId;
+  const userId = userStore.state.userinfo?.userId;
   const params = {
     userId,
     attendance_year_month
   }
   const { data: resp } = await getAttendanceList(params);
   request_data.value = resp.data;
+}
+onMounted(async () => {
+  await getAttendanceListFn();
   // const { data: response } = await getUserAttendanceList(params);
   // if (response.code == 200) {
   //   alert(resp.message);

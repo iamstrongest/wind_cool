@@ -2,7 +2,7 @@
  * @Author: strongest-qiang 1309148358@qq.com
  * @Date: 2024-10-20 11:27:51
  * @LastEditors: strongest-qiang 1309148358@qq.com
- * @LastEditTime: 2024-11-15 13:46:58
+ * @LastEditTime: 2024-11-24 00:12:24
  * @FilePath: \Front-end\Vue\Vue3\IM\socket_io\socket_io_server\src\config\constraint.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -25,6 +25,7 @@ export const httpCode = {
   425: "插入好友申请列表失败",
   426: "申请已提交过了，请处理新的好友页面有无通知",
   427: "当前用户已在别的地方进行了登录，请勿泄露个人信息",
+  428: "您不在打卡范围内，无法打卡",
   441: "缺少必要参数",
 };
 const data = {};
@@ -73,3 +74,20 @@ switch (process.env.NODE_ENV) {
 }
 export const serverConfig = data;
 export const secretKey = "strongest ^0^";
+export const geolocation = {
+  // 打卡范围（单位：米）
+  allowedRadius: 200,
+  // 可以进行打卡的经纬度地点
+  positions: [
+    // 渝水一小经纬度坐标
+    {
+      targetLatitude: 27.8023,
+      targetLongitude: 114.931,
+    },
+    // 青少年宫经纬度坐标
+    {
+      targetLatitude: 27.8183,
+      targetLongitude: 114.9332,
+    },
+  ],
+};
